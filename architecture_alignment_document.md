@@ -1,187 +1,265 @@
-# Architecture Alignment Document
-IMMPAL – Architecture & Alignment Audit Phase
+# IMMPAL – Architecture Alignment Document  
+_Audit Phase – Structural Baseline Confirmation_
 
 ---
 
-## 1. Purpose
+## 1. Scope
 
-This document confirms the architectural baseline formally defined in the existing IMMPAL architecture and governance documentation.
+This document does **not** redefine IMMPAL architecture.
 
-This document does not redefine architectural principles.
+The architectural baseline is already defined in:
 
-Its purpose is to:
+- OS Role Map (Final Architecture Spec)
+- Governance & Architectural Compliance Documentation
+- Module-Level Master Specifications
 
-- Validate structural boundaries
-- Confirm authority ownership
-- Clarify enforcement expectations
-- Establish the benchmark against which implementation alignment will be evaluated
+This document:
 
-All references are derived from the formally documented:
-- Role Map Specification
-- Governance & Architectural Compliance documentation
-- Module architecture specifications
+- Confirms interpretation of the existing architectural baseline  
+- Consolidates architectural invariants  
+- Defines enforcement expectations  
+- Establishes the validation benchmark for implementation alignment  
 
----
-
-## 2. Architectural Baseline Confirmation
-
-The following architectural invariants are confirmed as established and non-negotiable:
-
-1. Library is the canonical, normalized, and versioned source of truth.
-2. CaseEngine exclusively governs deterministic case lifecycle transitions.
-3. Business Layer governs entitlement and activation only.
-4. Core modules and Ecosystem modules remain structurally separated.
-5. The system remains country-agnostic and program-agnostic.
-6. Governance and change-control rules apply to all structural modifications.
-
-These principles form the structural foundation of IMMPAL.
+This file serves as the architectural reference point for the audit phase.
 
 ---
 
-## 3. Module Responsibility Confirmation
+## 2. Purpose
 
-### 3.1 Library
+The purpose of this document is to:
 
-Confirmed Responsibilities:
-- Stores normalized program definitions
-- Stores eligibility logic
-- Stores evidence requirements
-- Defines validation criteria
-- Maintains versioned rule sets
+- Confirm structural boundaries  
+- Confirm authority ownership  
+- Confirm enforcement expectations  
+- Establish the benchmark against which implementation will be evaluated  
 
-Enforcement Expectation:
-- No rule logic duplication outside Library
-- No country or program logic embedded in CaseEngine or UI
-- All rule consumption must originate from Library
+No architectural redesign is introduced in this phase.
 
 ---
 
-### 3.2 CaseEngine
+## 3. Architectural Invariants (Confirmed)
 
-Confirmed Responsibilities:
-- Owns lifecycle states
-- Governs deterministic state transitions
-- Enforces validation checkpoints
-- Maintains case exclusivity
-- Prevents unauthorized state mutation
+The following principles are established and non-negotiable:
 
-Enforcement Expectation:
-- No direct state transitions outside CaseEngine
-- No UI-triggered lifecycle mutation
-- No entitlement-driven state override
+1. **Library is the single canonical, normalized, and versioned source of truth.**
+2. **The system is strictly country-agnostic and program-agnostic.**
+3. **CaseEngine exclusively governs deterministic lifecycle transitions.**
+4. **Execution is strictly case-centric and case-exclusive.**
+5. **Business Layer governs entitlement and activation only.**
+6. **Core modules and ecosystem modules remain structurally separated.**
+7. **BrainReport is a structural milestone artifact and activation prerequisite.**
+8. **Governance and change-control rules apply to structural modifications.**
 
----
-
-### 3.3 Business Layer
-
-Confirmed Responsibilities:
-- Governs subscription access
-- Controls feature activation
-- Controls PRO-level permissions
-- Validates ecosystem eligibility
-
-Enforcement Expectation:
-- Cannot modify case lifecycle state
-- Cannot override validation outcomes
-- Cannot alter Library definitions
+These define the architectural identity of IMMPAL.
 
 ---
 
-### 3.4 Core vs Ecosystem Modules
+## 4. Module Responsibility Confirmation
 
-Core Modules:
-- Library
-- CaseEngine
-- Validation Layer
-- Role & Access Control
-- Business Layer
+### 4.1 Library (Canonical Knowledge Layer)
 
-Ecosystem Modules:
-- JobMatch
-- Marketplace
-- External integrations
-- Add-on modules
+**Responsibilities**
 
-Enforcement Expectation:
-- Ecosystem modules may consume case data
-- Ecosystem modules may surface recommendations
-- Ecosystem modules may not mutate lifecycle state
-- Activation must satisfy entitlement and prerequisite artifacts
+- Consume external regulatory/program sources  
+- Normalize eligibility logic  
+- Store program definitions  
+- Store evidence requirements  
+- Define validation criteria  
+- Maintain versioned rule sets  
+- Expose structured outputs to all other modules  
 
----
-## 3.5 Authority Enforcement Matrix
+**Enforcement**
 
-The following matrix confirms intended authority distribution across modules:
+- No rule duplication outside Library  
+- No country-specific logic in CaseEngine  
+- No program-specific branching in UI  
+- No module may bypass Library normalization  
+- All rule execution must originate from Library metadata  
 
-| Module | Can Read Case Data | Can Modify Case Data | Can Transition Lifecycle State | Can Define Rules |
-|--------|-------------------|----------------------|-------------------------------|------------------|
-| Library | Yes | No | No | Yes |
-| CaseEngine | Yes | Yes | Yes | No |
-| Business Layer | Yes | No | No | No |
-| Ecosystem Modules | Scoped | No | No | No |
-| UI Layer | Yes | No | No | No |
-
-Any deviation from this authority model constitutes structural misalignment.
-
----
-## 4. Role Separation Confirmation
-
-Role enforcement is confirmed as follows:
-
-Platform Administrator:
-- Controls system configuration
-- Cannot directly mutate case lifecycle
-
-Firm Administrator:
-- Manages firm users
-- Cannot bypass lifecycle enforcement
-
-PRO User:
-- Manages assigned client cases
-- Subject to lifecycle gating
-
-DIY User:
-- Manages own case
-- Subject to identical lifecycle enforcement
-
-Role elevation must not introduce lifecycle bypass capability.
+Library remains the authoritative rule layer.
 
 ---
 
-## 5. Country-Agnostic & Program-Agnostic Enforcement
+### 4.2 CaseEngine (Lifecycle Authority)
+
+**Responsibilities**
+
+- Own lifecycle states  
+- Govern deterministic state transitions  
+- Enforce validation checkpoints  
+- Maintain case exclusivity  
+- Prevent unauthorized state mutation  
+- Control progression through milestones  
+
+**Enforcement**
+
+- No lifecycle transitions outside CaseEngine  
+- No UI-triggered lifecycle mutation  
+- No entitlement-based lifecycle override  
+- Concurrent lifecycle mutation must be structurally prevented  
+
+CaseEngine is the sole lifecycle authority.
+
+---
+
+### 4.3 Business Layer (Entitlement Governance)
+
+**Responsibilities**
+
+- Govern subscription access  
+- Control feature activation  
+- Enforce persona-based permissions (DIY Individual, DIY Enterprise, PRO)  
+- Validate ecosystem eligibility  
+
+**Enforcement**
+
+- Cannot modify lifecycle state  
+- Cannot override validation results  
+- Cannot alter Library definitions  
+- May validate eligibility, but defers lifecycle authority to CaseEngine  
+
+Business Layer governs access, not execution.
+
+---
+
+### 4.4 Core vs Ecosystem Separation
+
+**Core Modules**
+
+- Library  
+- CaseEngine  
+- Validation Layer  
+- Role & Access Control  
+- Business Layer  
+
+**Ecosystem Modules**
+
+- Muscle (execution & assisted automation)  
+- DocGen (narrative generation only)  
+- JobMatch  
+- Marketplace  
+- External integrations  
+
+**Ecosystem Constraints**
+
+- Depend on valid case context  
+- Depend on valid BrainReport  
+- Cannot exist independently of lifecycle  
+- Cannot mutate lifecycle state  
+- Cannot define rules  
+
+Structural isolation must be preserved.
+
+---
+
+### 4.5 Ecosystem Activation Governance
+
+Ecosystem modules may be activated only through governed entry points:
+
+1. Savy-driven activation when structural gaps are detected  
+2. BrainReport CTAs  
+3. Direct client activation (requires completed profile + valid BrainReport)
+
+In all cases:
+
+- Entitlement must be validated  
+- Case context must be valid  
+- BrainReport prerequisite must be satisfied  
+- Lifecycle authority remains with CaseEngine  
+- No module may bypass lifecycle enforcement  
+
+Activation is governed, not free-form.
+
+---
+
+## 5. Authority Enforcement Matrix
+
+| Module            | Read Case Data | Modify Case Data | Transition Lifecycle | Define Rules |
+|-------------------|----------------|------------------|----------------------|-------------|
+| Library           | Yes            | No               | No                   | Yes         |
+| CaseEngine        | Yes            | Yes              | Yes                  | No          |
+| Business Layer    | Yes            | No               | No                   | No          |
+| Ecosystem Modules | Scoped         | No               | No                   | No          |
+| UI Layer          | Yes            | No               | No                   | No          |
+
+Any deviation from this model constitutes structural misalignment.
+
+---
+
+## 6. Role Separation Confirmation
+
+### Platform Administrator
+- System configuration only  
+- Cannot mutate lifecycle state  
+
+### Firm Administrator
+- Manage firm users  
+- Cannot bypass lifecycle enforcement  
+
+### PRO User
+- Manage assigned client cases  
+- Subject to lifecycle gating  
+
+### DIY User
+- Manage own case  
+- Subject to identical lifecycle enforcement  
+
+Role elevation must never introduce lifecycle bypass capability.
+
+---
+
+## 7. Country-Agnostic & Program-Agnostic Enforcement
 
 Implementation must ensure:
 
-- No country-specific branching in CaseEngine
-- No program-specific logic embedded in UI
-- No rule duplication outside Library
-- All rule execution references normalized metadata
+- No country-specific branching in CaseEngine  
+- No program-specific logic embedded in UI  
+- No rule duplication outside Library  
+- All rule execution references normalized Library metadata  
+- Adding jurisdictions must not require core engine modification  
 
-Violation of abstraction introduces structural drift and must be flagged during implementation alignment assessment.
-
----
-
-## 6. Alignment Benchmark
-
-This document defines the architectural benchmark for the audit phase.
-
-The Implementation Alignment Report will evaluate:
-
-- Boundary enforcement integrity
-- Lifecycle authority protection
-- Rule-source consistency
-- Entitlement separation
-- Ecosystem isolation
-- Case exclusivity and concurrency safety
-
-Any deviation identified will be documented with severity and stabilization recommendation.
+Violation introduces structural drift.
 
 ---
 
-## 7. Conclusion
+## 8. Governance Revalidation Requirement
 
-The architectural baseline is confirmed as defined in existing documentation.
+Any structural adjustment identified during audit must:
 
-The objective of this phase is not architectural redesign.
+- Preserve Library authority  
+- Preserve lifecycle determinism  
+- Preserve case exclusivity  
+- Preserve ecosystem isolation  
+- Preserve abstraction boundaries  
 
-The objective is structural validation and controlled alignment of implementation with the established architectural principles.
+Architectural drift must be explicitly documented before remediation.
+
+---
+
+## 9. Audit Benchmark
+
+This document defines the validation baseline for:
+
+- Boundary enforcement integrity  
+- Lifecycle authority protection  
+- Rule-source consistency  
+- Entitlement separation  
+- Ecosystem isolation  
+- Activation governance compliance  
+- Case exclusivity and concurrency safety  
+
+The Implementation Alignment Report will reference this document directly.
+
+---
+
+## 10. Conclusion
+
+Architecture remains defined by existing IMMPAL documentation.
+
+This audit phase:
+
+- Does not redesign architecture  
+- Does not introduce new principles  
+- Validates structural alignment of implementation  
+
+**Objective:** controlled alignment, not reinvention.
