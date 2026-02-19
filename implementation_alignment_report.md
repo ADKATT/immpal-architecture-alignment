@@ -1,165 +1,209 @@
-# Implementation Alignment Report
-IMMPAL – Architecture & Alignment Audit Phase
+# IMMPAL – Implementation Alignment Report  
+_Audit Phase – Structural Compliance Assessment_
 
 ---
 
-## 1. Purpose
+## 1. Scope
 
-This document evaluates the current implementation against the confirmed architectural baseline.
+This document evaluates the current implementation against the confirmed architectural baseline defined in:
 
-The objective is to:
+- Architecture Alignment Document  
+- OS Role Map Specification  
+- Governance & Architectural Compliance Documentation  
 
-- Validate structural alignment
-- Identify boundary violations
-- Detect authority drift
-- Highlight governance risks
-- Define stabilization requirements
+This document does **not** redefine architecture.
 
-This document does not redefine architecture.
-It evaluates implementation compliance.
+It evaluates implementation compliance and structural integrity.
 
 ---
 
-## 2. Evaluation Methodology
+## 2. Objective
 
-The implementation was reviewed against:
+The objective of this assessment is to:
 
-- Module responsibility definitions
-- Authority enforcement expectations
-- Governance and change-control principles
-- Lifecycle determinism requirements
-- Library normalization rules
-- Core vs Ecosystem isolation model
+- Validate structural alignment with confirmed invariants  
+- Detect authority boundary violations  
+- Identify lifecycle mutation risks  
+- Detect rule-source inconsistencies  
+- Identify governance drift  
+- Define stabilization priorities  
 
-Each module was assessed for:
-
-- Boundary integrity
-- Rule source consistency
-- Lifecycle mutation control
-- Entitlement interference
-- Country/program abstraction compliance
+This report forms the technical basis for the Stabilization & Execution Roadmap.
 
 ---
 
-## 3. Alignment Matrix
+## 3. Evaluation Framework
 
-| Architectural Invariant | Expected Enforcement | Observed Implementation | Alignment Level | Notes |
-|--------------------------|----------------------|-------------------------|----------------|------|
-| CaseEngine lifecycle authority | No direct state mutation outside CaseEngine | [Observation] | Aligned / Partial / Misaligned | |
-| Library as rule source | No rule duplication outside Library | [Observation] | | |
-| Business Layer separation | No lifecycle mutation via entitlement logic | [Observation] | | |
-| Ecosystem isolation | No lifecycle modification from ecosystem modules | [Observation] | | |
-| Country-agnostic enforcement | No country-specific branching in core modules | [Observation] | | |
-| Program-agnostic enforcement | No program logic embedded outside Library | [Observation] | | |
+Implementation was reviewed against the following enforcement categories:
 
-Alignment Levels:
-- Aligned
-- Partially Aligned
-- Misaligned
+### 3.1 Structural Boundary Integrity
+- Clear separation between Library, CaseEngine, Business Layer, and Ecosystem modules
+- No cross-layer leakage of authority
+
+### 3.2 Authority Enforcement
+- Lifecycle transitions centralized in CaseEngine
+- No unauthorized state mutation
+- No entitlement-based lifecycle override
+
+### 3.3 Rule Source Consistency
+- No rule duplication outside Library
+- No embedded country/program logic in core modules
+- All eligibility logic normalized through Library
+
+### 3.4 Case Exclusivity & Concurrency
+- Deterministic lifecycle transitions
+- Prevention of concurrent mutation
+- Case-level isolation maintained
+
+### 3.5 Ecosystem Isolation
+- No lifecycle mutation from ecosystem modules
+- Activation gated by BrainReport + entitlement
+- No independent ecosystem execution
+
+Each module and flow was assessed against these criteria.
 
 ---
 
-## 4. Structural Gap Log
+## 4. Alignment Classification Model
 
-Each gap is documented as follows:
+Each invariant is classified as:
+
+- **Aligned** – Fully compliant with architectural baseline  
+- **Partially Aligned** – Compliant in intent but boundary hardening required  
+- **Misaligned** – Violates architectural authority model  
+- **At Risk** – Currently aligned but vulnerable to future drift  
 
 ---
 
-### Gap ID: G-01
-**Area:** [Module / Layer]
+## 5. Architectural Alignment Matrix
+
+| Invariant | Expected Enforcement | Observed State | Classification | Notes |
+|------------|---------------------|----------------|----------------|-------|
+| CaseEngine lifecycle authority | No state mutation outside CaseEngine | [Observation] | | |
+| Library as canonical rule source | No rule duplication | [Observation] | | |
+| Business Layer separation | No lifecycle influence | [Observation] | | |
+| Ecosystem isolation | No lifecycle mutation | [Observation] | | |
+| Country-agnostic enforcement | No country branching in core | [Observation] | | |
+| Program-agnostic enforcement | No embedded program logic | [Observation] | | |
+| Case exclusivity | No concurrent mutation | [Observation] | | |
+
+---
+
+## 6. Structural Gap Log
+
+All structural gaps are documented using the following format.
+
+---
+
+### Gap ID: G-XX
+
+**Layer / Module:**  
+[Module Name]
 
 **Description:**  
-[Detailed technical observation]
+Clear, technical explanation of observed misalignment.
 
 **Architectural Reference:**  
-[Reference to invariant]
+Reference to confirmed invariant.
 
 **Impact:**  
-[Explain structural risk]
+- Lifecycle authority risk  
+- Rule inconsistency  
+- Governance violation  
+- Long-term maintainability risk  
 
 **Severity:**  
-Low / Medium / High
+Low / Medium / High / Critical  
 
-**Recommended Adjustment:**  
-[Specific stabilization action]
+**Stabilization Requirement:**  
+Specific technical correction required.
 
-**Estimated Effort Band:**  
-Low / Medium / High
-
----
-
-(Additional gaps documented in same structure)
+**Priority Level:**  
+Immediate / High / Medium / Low  
 
 ---
 
-## 5. Risk Severity Table
+(Repeat per identified gap)
 
-| Risk ID | Description | Impact | Likelihood | Severity | Recommended Action |
-|----------|-------------|--------|------------|----------|-------------------|
-| R-01 | Direct lifecycle mutation | High | Medium | High | Centralize transitions |
-| R-02 | Rule duplication outside Library | Medium | High | Medium | Extract to Library |
-| R-03 | Entitlement override risk | High | Low | Medium | Enforce gating validation |
+---
+
+## 7. Risk Severity Table
+
+| Risk ID | Description | Structural Impact | Likelihood | Severity | Required Action |
+|----------|-------------|------------------|------------|----------|----------------|
+| R-01 | Direct lifecycle mutation | Lifecycle corruption | Medium | High | Centralize transitions |
+| R-02 | Rule duplication | Governance drift | High | Medium | Extract to Library |
+| R-03 | Entitlement override exposure | Authority violation | Low | Medium | Enforce gating validation |
 
 Severity reflects:
-- Structural impact
-- Governance violation level
-- Long-term maintainability risk
+
+- Architectural boundary violation level  
+- Governance breach level  
+- Long-term system stability impact  
 
 ---
 
-## 6. Reusable Components Assessment
+## 8. Reusability Assessment
 
-The following components appear structurally sound and reusable:
+### Structurally Sound & Reusable
 
-- Authentication layer
-- Intake scaffolding
-- Role structure foundation
-- [Additional modules pending confirmation]
+- Authentication layer  
+- Intake scaffolding  
+- Base role enforcement logic  
+- [Additional modules pending validation]
 
-The following components require boundary hardening:
+### Requires Boundary Hardening
 
-- [List here]
-- [List here]
+- [Module Name]  
+- [Module Name]  
 
-The following components may require refactor:
+### Requires Refactor for Architectural Compliance
 
-- [List here]
+- [Module Name]  
+- [Module Name]  
+
+Refactor does not imply rebuild.
+It indicates structural realignment required.
 
 ---
 
-## 7. Concurrency & Case Exclusivity Review
+## 9. Case Exclusivity & Concurrency Review
 
-Assessment includes:
+Assessment criteria:
 
-- Prevention of concurrent lifecycle mutation
-- Case state locking mechanisms
-- Isolation between parallel module activation
-- Transaction integrity enforcement
+- Deterministic state transitions  
+- Transaction isolation integrity  
+- Prevention of concurrent lifecycle mutation  
+- Proper locking or gating mechanisms  
 
 Findings:
-[Detail observations]
+
+[Detailed technical findings]
+
+If lifecycle mutation can occur outside CaseEngine, this is classified as a high-severity issue.
 
 ---
 
-## 8. Alignment Summary
+## 10. Overall Structural Classification
 
-Overall Classification:
+Based on current observations:
 
-- Structurally Sound
-- Structurally Recoverable with Controlled Refactor
-- At Risk of Architectural Drift
+- Structurally Sound  
+- Structurally Recoverable with Controlled Hardening  
+- At Risk of Architectural Drift  
 
-Final classification to be determined upon full module verification.
+Final classification is confirmed upon completion of full module-level validation.
 
 ---
 
-## 9. Conclusion
+## 11. Conclusion
 
 This report identifies:
 
-- Confirmed alignment areas
-- Structural misalignments
-- Governance enforcement risks
-- Required stabilization priorities
+- Areas fully aligned with architectural baseline  
+- Areas partially aligned requiring hardening  
+- Structural misalignments  
+- Governance enforcement risks  
+- Stabilization priorities  
 
-The following document defines the ordered execution roadmap.
+The following document defines the ordered execution roadmap required to achieve full architectural compliance.
