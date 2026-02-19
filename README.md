@@ -1,54 +1,84 @@
 # IMMPAL – Architecture & Alignment Audit Phase
 
-## Overview
+## Purpose
 
-This repository contains the deliverables for the Architecture & Alignment Audit Phase of IMMPAL.
+This repository contains the formal deliverables for the IMMPAL Architecture & Alignment Audit Phase.
 
-The objective of this phase is to validate the current implementation against the formally defined architectural baseline and governance framework.
+The objective of this phase is to validate the current implementation against the established architectural baseline and governance framework.
 
-This phase does not redefine architecture.  
-It evaluates structural alignment and identifies stabilization priorities.
+This phase does not redefine architecture.
+
+It evaluates structural compliance and defines stabilization priorities required before further expansion.
 
 ---
 
-## Scope of This Audit
+## Architectural Context
 
-The audit focuses on:
+The architectural baseline is already formally defined through:
 
-- Validation of implementation against documented module responsibilities
+- Role Map Specification
+- Governance & Architectural Compliance documentation
+- Module Architecture Specifications
+
+This audit operates strictly within that defined framework.
+
+No architectural redesign is introduced in this phase.
+
+---
+
+## Audit Scope
+
+The audit evaluates implementation alignment across the following structural invariants:
+
 - Enforcement of CaseEngine lifecycle authority
-- Verification of Library as the canonical and versioned source of truth
-- Confirmation of Business Layer entitlement separation
-- Core vs Ecosystem module boundary validation
-- Country-agnostic and program-agnostic compliance
-- Governance and change-control adherence
+- Library as the single canonical, normalized, and versioned source of truth
+- Strict separation of Business Layer entitlement logic from lifecycle authority
+- Core vs Ecosystem module boundary integrity
+- Country-agnostic and program-agnostic enforcement
+- Deterministic, case-centric, and case-exclusive execution
+- Governance and change-control compliance
+
+The objective is structural validation, not feature assessment.
 
 ---
 
 ## Deliverables
 
 1. `architecture_alignment_document.md`  
-   Formal confirmation of architectural boundaries and enforcement model.
+   Formal confirmation of architectural invariants and enforcement expectations.
 
 2. `implementation_alignment_report.md`  
-   Structured evaluation of the current implementation against the architectural baseline.
+   Structured evaluation of implementation compliance, including:
+   - Alignment Matrix
+   - Structural Gap Log
+   - Risk Severity Assessment
+   - Reuse vs Refactor classification
 
 3. `stabilization_execution_roadmap.md`  
-   Practical and prioritized roadmap for structural hardening and controlled execution.
+   Ordered stabilization sequence derived from identified risks and gaps.
 
 ---
 
-## Guiding Principles
+## Guiding Enforcement Principles
 
-- No architectural principles are redefined in this phase.
-- The objective is alignment, not reconstruction.
-- Structurally sound components should be preserved.
-- Structural risks must be identified early.
-- Implementation must remain governed and deterministic.
+- Architectural invariants are treated as non-negotiable.
+- Authority boundaries must be explicit and enforced.
+- Lifecycle mutation must remain centralized and deterministic.
+- Rule logic must originate exclusively from Library.
+- Entitlement logic must not influence lifecycle authority.
+- Ecosystem modules must remain activation-governed and lifecycle-dependent.
+
+---
+
+## Operating Constraint
+
+No feature expansion, jurisdiction scaling, or ecosystem growth should occur until structural alignment is verified and critical risks are stabilized.
 
 ---
 
 ## Status
 
-Audit phase initiated under formal engagement.  
-All findings and recommendations are contained within the referenced documents.
+Audit phase initiated under formal engagement.
+
+All findings, classifications, and stabilization sequencing are contained within the referenced documents.
+
